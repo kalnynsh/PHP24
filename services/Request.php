@@ -27,6 +27,7 @@ class Request
     {
         $this->requestString = $_SERVER['REQUEST_URI'];
         $this->method = $_SERVER['REQUEST_METHOD'];
+        $this->params = $_REQUEST ? : [];
         $this->parseRequest();
     }
 
@@ -45,7 +46,6 @@ class Request
             var_dump($matches);
             $this->controllerName = $matches['controller'][0];
             $this->actionName = $matches['action'][0];
-            $this->params = $_REQUEST ? : [];
         } else {
             echo 'Matches not found';
             return false;
