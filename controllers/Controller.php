@@ -14,15 +14,29 @@
 
 namespace app\controllers;
 
+use app\interfaces\IRenderer;
+
 /**
  * Controller abstract class
  */
 abstract class Controller
 {
-    private $_action;
-    private $_defaultAction = 'index';
-    private $_layout = 'master';
-    private $_useLayout = true;
+    protected $action;
+    protected $defaultAction = 'index';
+    protected $layout = 'master';
+    protected $useLayout = true;
+    protected $renderEngine;
+
+    /**
+     * Init property $renderer setting to passing 
+     * IRenderer $render
+     *
+     * @param IRenderer $renderer - Engine for rendering
+     */
+    public function __construct(IRenderer $renderEngine)
+    {
+        $this->renderEngine = $renderEngine;
+    }
 
     /**
      * Run given action
@@ -33,10 +47,8 @@ abstract class Controller
      */
     public function runAction(string $action = null)
     {
-        $this->_action = $action ?? $this->_defaultAction;
-        $method = 'action' . ucfirst($this->_action);
-
-        // var_dump($action, $method);
+        $this->action = $action ?? $this->defaultAction;
+        $method = 'action' . ucfirst($this->action);
 
         if (method_exists($this, $method)) {
             $this->$method();
@@ -47,7 +59,7 @@ abstract class Controller
     }
 
     /**
-     * Render template use or not $_layout
+     * Render template use or not $layout
      *
      * @param string $template - template's name
      * @param array  $params   - params passing to template
@@ -56,9 +68,9 @@ abstract class Controller
      */
     public function render(string $template, array $params = [])
     {
-        if ($this->_useLayout) {
+        if ($this->useLayout) {
             return $this->renderTemplate(
-                "/layouts/{$this->_layout}",
+                "/layouts/{$this->layout}",
                 [
                     'content' => $this->renderTemplate($template, $params),
                 ]
@@ -74,16 +86,10 @@ abstract class Controller
      * @param string $template - template's name
      * @param array  $params   - params passing to template
      * 
-     * @return void
+     * @return string
      */
-    public function renderTemplate(string $template, array $params = [])
+    public function renderTemplate(string $template, array $params = []) : string
     {
-        ob_start();
-        extract($params);
-        $templatePath = TEMPLATES_DIR . '/' . $template . 'Tmpl.php';
-        include_once $templatePath;
-
-        return ob_get_clean();
+        return $this->renderEngine->render($template, $params);
     }
-
 } 
