@@ -27,14 +27,11 @@ use app\services\Request;
 
 spl_autoload_register([new Autoloader(), 'loadClass']);
 
-// session_start();
-// var_dump($_SERVER['REQUEST_URI']); // '/index.php/product/card?id=1'
-
 $request = new Request();
 
 $controllerName = $request->getControllerName() ? : 'product';
 $actionName = $request->getActionName();
-$params = $request->getParams('id'); // 1
+$id = $request->getParams('id'); // 1
 
 $controllerClass = CONTROLLERS_NAMESPACE . ucfirst($controllerName) . 'Controller';
 
