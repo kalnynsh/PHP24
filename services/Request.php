@@ -39,11 +39,13 @@ class Request
      */
     protected function parseRequest()
     {
+        // $pattern
+        //     = "#[/]?(?P<controller>\w+)[/]?(?P<action>\w+)?[/]?[?]?(?P<params>.*)#ui"; 
+
         $pattern
-            = "#/index.php/(?P<controller>\w+)[/]?(?P<action>\w+)?[/]?[?]?(?P<params>.*)#ui";
+            = "#[/]?index.php[/]?(?P<controller>\w+)[/]?(?P<action>\w+)?[/]?[?]?(?P<params>.*)#ui";
 
         if (preg_match_all($pattern, $this->requestString, $matches)) {
-            var_dump($matches);
             $this->controllerName = $matches['controller'][0];
             $this->actionName = $matches['action'][0];
         } else {
