@@ -49,7 +49,7 @@ class Request
             $this->controllerName = $matches['controller'][0];
             $this->actionName = $matches['action'][0];
         } else {
-            echo 'Matches not found';
+            // echo 'Matches not found';
             return false;
         }
     }
