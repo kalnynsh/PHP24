@@ -46,9 +46,9 @@ class ProductController extends Controller
      */
     public function actionCard()
     {
-        $id = filter_var($_GET['id'], FILTER_VALIDATE_INT);
-
+        $id = filter_var($_REQUEST['id'], FILTER_VALIDATE_INT);
         $product = Product::getOne($id);
+        
         // test
         $is_login = true;
 
