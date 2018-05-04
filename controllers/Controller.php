@@ -31,7 +31,7 @@ abstract class Controller
      * Init property $renderer setting to passing 
      * IRenderer $render
      *
-     * @param IRenderer $renderer - Engine for rendering
+     * @param IRenderer $renderEngine - Engine for rendering
      */
     public function __construct(IRenderer $renderEngine)
     {
@@ -47,7 +47,7 @@ abstract class Controller
      */
     public function runAction(string $action = null)
     {
-        $this->action = $action ?? $this->defaultAction;
+        $this->action = $action ? : $this->defaultAction;
         $method = 'action' . ucfirst($this->action);
 
         if (method_exists($this, $method)) {
