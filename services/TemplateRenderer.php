@@ -16,7 +16,7 @@ class TemplateRenderer implements IRenderer
      * 
      * @return string - rendered template
      */
-    public function renderTemplate(string $template, array $params = []) : string
+    public function render(string $template, array $params = []) : string
     {
         ob_start();
         extract($params);
