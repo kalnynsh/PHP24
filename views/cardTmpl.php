@@ -12,7 +12,7 @@
             <p>Количество: <?php echo $product->amount; ?> шт.</p>
         </div>
         <?php if ($is_login) : ?>
-            <form name="addtocart" action="?c=cart&a=add"
+            <form name="addtocart" action="/cart/add?id=<?php echo $product->id; ?>"
                 class="product-addtocart" 
                 method="POST">                
                     <input type="hidden" name="id" 

@@ -25,22 +25,22 @@ crossorigin="anonymous" defer></script>
                 <a href="/index.php">Главная</a>
             </li>          
             <li class="menu1__item">
-                <a href="/comments/index">Оставить комментарий</a>
+                <a href="/index.php/comments/index">Оставить комментарий</a>
             </li>
             <li class="menu1__item">
-                <a href="/register/index">Регистрация</a>
+                <a href="/index.php/register/index">Регистрация</a>
             </li>
             <li class="menu1__item">
-                <a href="/login/index">Вход</a>
+                <a href="/index.php/login/index">Вход</a>
             </li>
             <li class="menu1__item">
-                <a href="/logout/index">Выход</a>
+                <a href="/index.php/logout/index">Выход</a>
             </li>
             <li class="menu1__item">
-                <a href="/cart/index">Личный кабинет</a>
+                <a href="/index.php/cart/index">Личный кабинет</a>
             </li>                                    
             <!-- <li class="menu1__item">
-                <a href="admin.php">Админ панель</a>
+                <a href="/index.php/admin">Админ панель</a>
             </li>               -->
         </ul>
         </nav>
