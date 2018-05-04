@@ -22,62 +22,27 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/../config/app.php';
 require_once ROOT_DIR . '/services/Autoloader.php';
 require_once VENDOR_DIR . '/autoload.php';
 use app\services\Autoloader;
+use app\services\TemplateRenderer;
+use app\services\Request;
 
 spl_autoload_register([new Autoloader(), 'loadClass']);
 
-session_start();
+// session_start();
+// var_dump($_SERVER['REQUEST_URI']); // '/index.php/product/card?id=1'
 
-$uri = $_SERVER['REQUEST_URI'];
-$uriParts = explode('/', $uri);
+$request = new Request();
 
-unset($uriParts[0]);
-$uriParts = array_values($uriParts);
+$controllerName = $request->getControllerName() ? : 'product';
+$actionName = $request->getActionName();
+$params = $request->getParams('id'); // 1
 
-$controllerName =
-    isset($uriParts[0]) && ($uriParts[0] !== '') ?
-    $uriParts[0] : 'product';
-
-switch ($controllerName) {
-    case 'product':
-        $controllerName = 'product';
-        break;
-
-    case 'user':
-        $controllerName = 'user';
-        break;
-
-    default:
-        header('HTTP/1.1 404 Not Found');
-        die('Error 404 Not Found');
-}
-
-$controllerClass = CONTROLLERS_NAMESPACE .
-    ucfirst($controllerName) .
-    'Controller';
-
-$id = false;
-
-if (isset($uriParts[1]) && is_numeric($uriParts[1])) {
-    $id = $uriParts[1];
-    $uriParts[1] = 'card';
-}
-
-$actionName = isset($uriParts[1]) && ($uriParts[1] !== '') &&
-    is_string($uriParts[1]) ? $uriParts[1] : 'index';
-
-if (!$id) {
-    $id =
-        isset($uriParts[2]) && is_numeric($uriParts[2]) ?
-        $uriParts[2] : false;
-}
-
-if ($id) {
-    $_GET['id'] = $id;
-}
+$controllerClass = CONTROLLERS_NAMESPACE . ucfirst($controllerName) . 'Controller';
 
 if (class_exists($controllerClass)) {
     /** @var $controller */
-    $controller = new $controllerClass();
+    $controller = new $controllerClass(new TemplateRenderer());
+    // Twig version
+    // $controller = new $controllerClass(new TwigRenderer());
     $controller->runAction($actionName);
 } else {
     echo sprintf('This %s controllerClass not exists', $controllerClass);
