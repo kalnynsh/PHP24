@@ -274,7 +274,7 @@ abstract class DbModel
      */
     public function save()
     {
-        if (empty($this->newProperties)) {
+        if (empty($this->newProperties['id'])) {
             return $this->insert();
         }
 
@@ -316,7 +316,7 @@ abstract class DbModel
      */
     public function __set(string $name, $value)
     {
-        if (empty($this->newProperties)) {
+        if (empty($this->newProperties['id'])) {
             $this->fillProperties();
         }
 
@@ -340,7 +340,7 @@ abstract class DbModel
      */
     public function __get(string $name)
     {
-        if (empty($this->currentProperties)) {
+        if (empty($this->currentProperties['id'])) {
             // Fill currentProperties and newProperties
             $this->fillProperties();
         }
