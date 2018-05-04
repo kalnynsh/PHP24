@@ -1,0 +1,12 @@
+{
+  "name": "learnphp/education-one.local",
+  "authors": [
+    {
+      "name": "Kalnynsh",
+      "email": "kda869@yandex.ru"
+    }
+  ],
+  "require": {
+    "twig/twig": "^2.4.8"
+  }
+}

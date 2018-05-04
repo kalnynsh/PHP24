@@ -1,0 +1,282 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: aliceblue;
+  /* max-height: 100vh; */
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+.wrap {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.main-header {
+  width: 100%;
+  margin-bottom: 4px;
+}
+
+.menu1 {
+  margin: 0 auto;
+  color: rgb(247, 245, 240);
+  border-top: 1px solid #999;
+  border-bottom: 1px solid #999;
+  padding: 0 14%;
+  font: 14px sans-serif;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.menu1__item {
+  display: inline-block;
+  border-right: 1px solid rgba(64, 150, 238, 0.5);
+  margin: 0;
+  padding: 0;
+  background: -moz-linear-gradient(
+    top,
+    rgba(240, 249, 255, 1) 0%,
+    rgba(203, 235, 255, 1) 47%,
+    rgba(161, 219, 255, 1) 100%
+  );
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(
+    top,
+    rgba(240, 249, 255, 1) 0%,
+    rgba(203, 235, 255, 1) 47%,
+    rgba(161, 219, 255, 1) 100%
+  );
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    rgba(240, 249, 255, 1) 0%,
+    rgba(203, 235, 255, 1) 47%,
+    rgba(161, 219, 255, 1) 100%
+  );
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f9ff', endColorstr='#a1dbff', GradientType=0);
+  /* IE6-9 */
+}
+
+.menu1__item_active {
+  background: -moz-linear-gradient(
+    top,
+    rgba(122, 188, 255, 1) 0%,
+    rgba(96, 171, 248, 1) 44%,
+    rgba(64, 150, 238, 1) 100%
+  );
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(
+    top,
+    rgba(122, 188, 255, 1) 0%,
+    rgba(96, 171, 248, 1) 44%,
+    rgba(64, 150, 238, 1) 100%
+  );
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    rgba(122, 188, 255, 1) 0%,
+    rgba(96, 171, 248, 1) 44%,
+    rgba(64, 150, 238, 1) 100%
+  );
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7abcff', endColorstr='#4096ee', GradientType=0);
+  /* IE6-9 */
+  color: #f4f4f4;
+}
+
+.menu1__item.menu1__item_active a {
+  color: #eaeaea;
+}
+
+.menu1__item a {
+  text-decoration: none;
+  color: #4c4c4c;
+  display: block;
+  padding: 10px 15px;
+}
+
+.menu1__item:first-child {
+  border-left: 1px solid rgba(211, 215, 216, 0.226);
+}
+
+.menu1__item a:hover {
+  background-color: #006cc9;
+  color: #eaeaea;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  flex-grow: 1;
+  margin: 0 auto;
+  padding: 6px 0 0 0;
+  color: rgba(40, 40, 40, 0.95);
+  background-color: #fbfbfb;
+}
+
+.content,
+.content-body {
+  padding: 15px 15px 60px 30px;
+  line-height: 1.4rem;
+}
+
+footer {
+  flex-basis: auto;
+  width: 100%;
+  background-color: rgba(122, 188, 255, 0.2);
+}
+
+.footer {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 10%;
+  padding: 15px 0;
+  color: dimgrey;
+}
+
+.content p,
+.content-body p {
+  line-height: 24px;
+}
+
+.links-list {
+  line-height: 1.4rem;
+  list-style: square;
+}
+
+.tasks-list li {
+  padding-bottom: 10px;
+}
+
+.tasks-list ul {
+  list-style: square;
+}
+
+.gallery {
+  height: auto;
+  width: 99%;
+  display: flex;
+  flex-flow: row wrap;
+  /* justify-content: flex-start; */
+  justify-content: center;
+  /* align-items: space-between; */
+  align-items: center;
+}
+
+.gallery__item {
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+  width: 25%;
+  padding-bottom: 15px;
+  margin-right: 5px;
+}
+
+form[name='upload'] {
+  margin-top: 15px;
+  margin-left: 30px;
+}
+
+.products {
+  height: auto;
+  width: 99%;
+  display: flex;
+  flex-flow: row wrap;
+  /* justify-content: flex-start; */
+  justify-content: center;
+  /* align-items: space-between; */
+  align-items: center;
+}
+
+.products__item {
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+  width: 25%;
+  padding-bottom: 15px;
+  margin-right: 5px;
+  margin-bottom: 15px;
+  line-height: 0.5rem;
+}
+
+.product-description {
+  margin-left: 20px;
+}
+
+.product-description-cart {
+  margin-left: 20px;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.product-description-cart div p {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+.product-content {
+  width: 50%;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-bottom: 30px;
+}
+
+.product-addtocart {
+  margin: 15px 15px 0 15px;
+  padding: 15px 15px 0 30px;
+}
+
+.product-addtocart a {
+  display: block;
+  background-color: rgb(74, 142, 209);
+  padding: 10px 15px;
+  text-decoration: none;
+  color: rgb(248, 248, 248);
+}
+
+.product-addtocart a:hover {
+  cursor: pointer;
+  background-color: rgba(122, 188, 255, 0.9);
+  color: rgb(66, 66, 66);
+}
+
+.product-addtocart input {
+  margin: 15px 0 8px 0;
+  padding-top: 4px;
+  padding-left: 6px;
+}
+
+.form-inputs {
+  margin: 15px 8px 15px 0;
+}
+
+.form-inputs > input {
+  padding-left: 8px;
+  margin-left: 15px;
+}
+
+.greeting {
+  padding: 15px 0 15px 12.5%;
+}
+
+.buy {
+  margin-left: 14%;
+  margin-bottom: 1%;
+}
+
+.buy button {
+  padding: 10px;
+  border-radius: 4px;
+}
