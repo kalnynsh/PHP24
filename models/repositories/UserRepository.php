@@ -31,4 +31,38 @@ class UserRepository extends Repository
     {
         return User::class;
     }
+
+    /**
+     * Get user's row of data from DB by username
+     * and password
+     *
+     * @param string $login - user's login
+     * @param string $pswd  - user's name
+     * 
+     * @return mixed - object or bool
+     */
+    public function getUser($login, $pswd)
+    {
+        $sql = sprintf(
+            "SELECT * FROM `%s` WHERE `login` = `:login`",
+            $this->getTableName()
+        );
+        $stmt = $this->db->prepare($sql);
+        $stmt->setFetchMode(
+            \PDO::FETCH_CLASS |
+                \PDO::FETCH_PROPS_LATE,
+            $this->getEntityClass()
+        );
+
+        $params = [':login' => $login];
+        $stmt->execute($params);
+
+        $user = $stmt->fetch();
+
+        if (password_verify($pswd, $user->password)) {
+            return $user;
+        }
+
+        return false;
+    }
 }
