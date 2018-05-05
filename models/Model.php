@@ -2,7 +2,7 @@
 namespace app\models;
 
 /**
- * Modelclass
+ * Model class
  */
 class Model
 {
