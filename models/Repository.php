@@ -75,14 +75,17 @@ abstract class Repository
         );
         $stmt = $this->db->prepare($sql);
 
+        $limit = $this->getEntityClass()::LIMIT_FROM;
+        $perPage = $this->getEntityClass()::PER_PAGE;
+
         $stmt->bindValue(
             ':limitFrom',
-            getEntityClass()::LIMIT_FROM,
+            $limit,
             \PDO::PARAM_INT
         );
         $stmt->bindValue(
             ':perPage',
-            getEntityClass()::PER_PAGE,
+            $perPage,
             \PDO::PARAM_INT
         );
 
@@ -96,7 +99,7 @@ abstract class Repository
         return $stmt->fetchAll(
             \PDO::FETCH_CLASS |
                 \PDO::FETCH_PROPS_LATE,
-            $this->getEntityClass
+            $this->getEntityClass()
         );
     }
 
