@@ -14,8 +14,8 @@
 
 namespace app\controllers;
 
-use app\models\Product;
-
+use app\models\repositories\ProductRepository;
+use app\services\Request;
 /**
  * Product Controller
  */
@@ -28,7 +28,7 @@ class ProductController extends Controller
      */
     public function actionIndex()
     {
-        $products = Product::getAll();
+        $products = (new ProductRepository())->getAll();
         $username = 'anonim';
 
         $params = [
@@ -46,8 +46,8 @@ class ProductController extends Controller
      */
     public function actionCard()
     {
-        $id = filter_var($_REQUEST['id'], FILTER_VALIDATE_INT);
-        $product = Product::getOne($id);
+        $id = filter_var((new Request())->getParams('id'), FILTER_VALIDATE_INT);
+        $product = (new ProductRepository())->getOne($id);
         
         // test
         $is_login = true;
