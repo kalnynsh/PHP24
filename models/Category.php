@@ -4,7 +4,7 @@ namespace app\models;
 /**
  *  Category model class
  */
-class Category extends DbModel
+class Category extends DataEntity
 {
     public $id;
     public $name;
