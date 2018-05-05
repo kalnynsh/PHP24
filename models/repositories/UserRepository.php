@@ -33,11 +33,10 @@ class UserRepository extends Repository
     }
 
     /**
-     * Get user's row of data from DB by username
-     * and password
+     * Get user's row of data from DB by 
+     *  user's DataEntity example
      *
-     * @param string $login - user's login
-     * @param string $pswd  - user's name
+     * @param DataEntity $userEntity - user's Enity
      * 
      * @return mixed - object or bool
      */
