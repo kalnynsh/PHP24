@@ -9,18 +9,28 @@ trait TSingletone
 {
     private static $_instance;
 
+    /**
+     * Empty __construct method
+     */
     private function __construct()
     {
     }
+    /**
+     * Empty __clone method
+     */
     private function __clone()
     {
     }
+    /**
+     * Empty __wakeup method
+     */
     private function __wakeup()
     {
     }
     /**
      * Return only one instance of any class
      *   
+     * @return static::$_instance
      */
     public static function getInstance()
     {
