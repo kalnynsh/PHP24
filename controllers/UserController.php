@@ -15,12 +15,24 @@
 namespace app\controllers;
 
 use app\models\User;
+use app\models\repositories\UserRepository;
+use app\services\AuthCheck;
 
 /**
  * User Controller
  */
 class UserController extends Controller
 {
+    private $_authCheck;
+
+    /**
+     * Init property with AuthCheck entity
+     */
+    public function __construct()
+    {
+        $this->_authCheck = new AuthCheck();
+    }
+
     /**
      * Default controller's action
      *
@@ -28,7 +40,7 @@ class UserController extends Controller
      */
     public function actionIndex()
     {
-        $params = [];
+        $params = ['message' => ''];
 
         echo $this->render('login', $params);
     }
@@ -40,21 +52,54 @@ class UserController extends Controller
      */
     public function actionLogin()
     {
-        $userlogin = filter_input(
-            INPUT_POST,
-            'user_login',
-            FILTER_SANITIZE_SPECIAL_CHARS
-        );
-// Not Finished
-/*
+        $message = '';
 
-        $is_login = true;
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (isset($_POST['sumbit_login'])) {
+                $login = filter_var(
+                    trim($_POST['user_login']),
+                    FILTER_SANITIZE_SPECIAL_CHARS
+                );
+                $pswd = filter_var(
+                    trim($_POST['user_password']),
+                    FILTER_SANITIZE_SPECIAL_CHARS
+                );
+                $lastLogin = date('Y-m-d H:i:s');
+            } else {
+                $message = "Неправильный логин или пароль!";
+                $this->redirect('/index.php/user/login');
+                exit();
+            }
 
-        $params = [
-            'is_login' => $is_login,
-        ];
+            $userEntity = new User();
+            $userEntity->login = $login;
+            $userEntity->password = $pswd;
+            $userEntity->password_hash = null;
+            $userEntity->last_login = $lastLogin;
 
-        echo $this->render('cart', $params);
+            $userDb = (new UserRepository($userEntity))->getUser();
+
+            if ($userDb) {
+                $this->_authCheck->setSessionParams($userDb);
+                $this->redirect('/index.php');
+
+                exit();
+            }
+        }
+
+        $params = ['message' => $message, ];
+        echo $this->render('login', $params);
     }
-         */
+
+    /**
+     * Redirect to given URL
+     *
+     * @param string $url - URL
+     * 
+     * @return void
+     */
+    protected function redirect(string $url)
+    {
+        return header('Location: ' . $url);
     }
+}
