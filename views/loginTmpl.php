@@ -1,4 +1,4 @@
-<form action="?c=user&a=index" method="post" name="login-form">
+<form action="/index.php/user/login" method="post" name="login-form">
     <div class="form-inputs">
         Логин:<input name="user_login" type="text"/>
     </div>
@@ -10,4 +10,4 @@
     </div>
 </form>
 
-<div><?php print $message ? : ''; ?></div>
+<div><?php echo $message ? : ''; ?></div>
