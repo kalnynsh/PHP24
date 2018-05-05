@@ -168,7 +168,7 @@ abstract class Repository
         $params = [];
         $columns = [];
 
-        foreach ($this->entity as $key => $value) {
+        foreach ($entity as $key => $value) {
             if ($key === 'id') {
                 continue;
             }
@@ -176,8 +176,8 @@ abstract class Repository
             $params[":{$key}"] = $value;
             $columns[] = "`{$key}`";
         }
-        $params[':id'] = 'null';
-        $columns[] = 'id';
+        // $params[':id'] = null;
+        // $columns[] = 'id';
 
         $columns = implode(', ', $columns);
         $placeholders = implode(', ', array_keys($params));
@@ -198,7 +198,7 @@ abstract class Repository
             die('We have : ' . $info[2]);
         }
 
-        $this->entity->id = $this->db->getLastInsertId();
+        $entity->id = $this->db->lastInsertId();
 
         return true;
     }
@@ -253,9 +253,9 @@ abstract class Repository
     public function save(DataEntity $entity)
     {
         if ($entity->id) {
-            return $this->insert($entity);
-        } else {
             return $this->update($entity);
+        } else {
+            return $this->insert($entity);
         }
     }
 
