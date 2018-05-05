@@ -31,10 +31,10 @@ crossorigin="anonymous" defer></script>
                 <a href="/index.php/register/index">Регистрация</a>
             </li>
             <li class="menu1__item">
-                <a href="/index.php/login/index">Вход</a>
+                <a href="/index.php/user/login">Вход</a>
             </li>
             <li class="menu1__item">
-                <a href="/index.php/logout/index">Выход</a>
+                <a href="/index.php/user/logout">Выход</a>
             </li>
             <li class="menu1__item">
                 <a href="/index.php/cart/index">Личный кабинет</a>
