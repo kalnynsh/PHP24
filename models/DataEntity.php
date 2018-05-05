@@ -7,6 +7,8 @@ namespace app\models;
  */
 abstract class DataEntity extends Model
 {
+    const LIMIT_FROM = 0;
+    const PER_PAGE = 6;
     /**
      * Get properties using only inside class
      *
