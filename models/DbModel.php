@@ -25,10 +25,10 @@ abstract class DbModel
     const LIMIT_FROM = 0;
     const PER_PAGE = 6;
     protected $db;
-    protected $privateProperties = [
+    protected $personalProperties = [
         'currentProperties',
         'newProperties',
-        'privateProperties',
+        'personalProperties',
         'db'
     ];
     protected $currentProperties = [];
@@ -197,7 +197,7 @@ abstract class DbModel
     protected function fillProperties()
     {
         foreach ($this as $key => $value) {
-            if ($this->isPrivate($key)) {
+            if ($this->isPersonal($key)) {
                 continue;
             }
             $this->currentProperties["{$key}"] = $value;
@@ -379,15 +379,15 @@ abstract class DbModel
 
     /**
      * Check if given name belongs 
-     * to privateProperties array
+     * to personalProperties array
      *
      * @param string $name - property name
      * 
      * @return boolean
      */
-    protected function isPrivate(string $name) : bool
+    protected function isPersonal(string $name) : bool
     {
-        return in_array($name, $this->privateProperties);
+        return in_array($name, $this->personalProperties);
     }
     /**
      * Check errors from PDO execute
