@@ -17,6 +17,4 @@ class Product extends DataEntity
     public $color;
     public $created_at;
     public $updated_at;
-    public $currentProperties = [];
-    public $newProperties = [];
 }
