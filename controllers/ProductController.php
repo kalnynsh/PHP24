@@ -65,8 +65,7 @@ class ProductController extends Controller
     {
         $id = filter_var((new Request())->getParams('id'), FILTER_VALIDATE_INT);
         $product = (new ProductRepository())->getOne($id);
-        
-        // test
+
         $is_login = $this->session->get('user')['isAuth'] ?? false;
 
         $params = [
