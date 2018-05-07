@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace app\models\entities;
 
 /**
  * Abstract class for keeping Model properties 

@@ -1,5 +1,5 @@
 <?php
-namespace app\models;
+namespace app\models\entities;
 
 /**
  *  Image model class
