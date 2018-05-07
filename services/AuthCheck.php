@@ -3,7 +3,10 @@ namespace app\services;
 
 // use app\models\entities\User;
 use app\models\entities\DataEntity;
-
+/**
+ * Class check user's credentials,
+ * set session user's params
+ */
 class AuthCheck
 {
     protected $currentSession;
