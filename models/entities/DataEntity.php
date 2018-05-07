@@ -2,6 +2,7 @@
 
 namespace app\models\entities;
 
+use app\models\Model;
 /**
  * Abstract class for keeping Model properties 
  */
