@@ -54,10 +54,10 @@ class Session
     }
 
     /**
-     * Stores datas in the session.
+     * Stores data in the session.
      *    
-     * @param string $name  - Name of the datas.
-     * @param mixed  $value - Your datas.
+     * @param string $name  - Name of the data.
+     * @param mixed  $value - Your data.
      * 
      * @return void
      **/
@@ -67,12 +67,12 @@ class Session
     }
 
     /**
-     * Gets datas from the session.
-     * Example: echo $_instance->get(userID);
+     * Gets data from the session.
+     * Example: echo $_instance->get(userId);
      *    
-     * @param string $name - Name of the datas to get.
+     * @param string $name - Name of the data to get.
      * 
-     * @return mixed - Datas stored in session.
+     * @return mixed - Data stored in session.
      **/
     public function get($name)
     {
