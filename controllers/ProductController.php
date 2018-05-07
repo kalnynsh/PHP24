@@ -14,13 +14,30 @@
 
 namespace app\controllers;
 
+use app\interfaces\IRenderer;
 use app\models\repositories\ProductRepository;
 use app\services\Request;
+use app\services\Session;
+
 /**
  * Product Controller
  */
 class ProductController extends Controller
 {
+    protected $session;
+
+    /**
+     * Init property $renderer setting to passing 
+     * IRenderer $render
+     *
+     * @param IRenderer $renderEngine - Engine for rendering
+     */
+    public function __construct(IRenderer $renderEngine)
+    {
+        parent::__construct($renderEngine);
+        $this->session = (new Session)::getInstance();
+    }
+
     /**
      * Default controller's action
      *
@@ -29,7 +46,7 @@ class ProductController extends Controller
     public function actionIndex()
     {
         $products = (new ProductRepository())->getAll();
-        $username = 'anonim';
+        $username = $this->session->get('user')['name'] ?? '';
 
         $params = [
             'products' => $products,
@@ -50,7 +67,7 @@ class ProductController extends Controller
         $product = (new ProductRepository())->getOne($id);
         
         // test
-        $is_login = true;
+        $is_login = $this->session->get('user')['isAuth'] ?? false;
 
         $params = [
             'product' => $product,
