@@ -14,4 +14,18 @@ class Material extends DataEntity
      */
     public $id;
     public $material_name;
+
+    /**
+     * Material's constructor
+     *
+     * @param int    $id            - Material's ID
+     * @param string $material_name - Material's name
+     */
+    public function __construct(
+        $id = null,
+        $material_name = null
+    ) {
+        $this->id = $id;
+        $this->material_name = $material_name;
+    }
 }
