@@ -15,6 +15,7 @@
 namespace app\models;
 
 use app\services\Db;
+use app\models\entities\DataEntity;
 
 /**
  * Base class for driving Data Base
