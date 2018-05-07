@@ -8,8 +8,7 @@
                 <?php echo $product->product_name; ?>
                 <?php echo $product->color; ?>
             </p>
-            <p>Цена: <?php echo $product->price; ?> руб.</p>
-            <p>Количество: <?php echo $product->amount; ?> шт.</p>
+            <p>Цена: <?php echo $product->price; ?> руб.</p>            
         </div>
         <?php if ($is_login) : ?>
             <form name="addtocart" action="/cart/add?id=<?php echo $product->id; ?>"
