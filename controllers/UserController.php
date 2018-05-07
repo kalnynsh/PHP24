@@ -14,7 +14,7 @@
 
 namespace app\controllers;
 
-use app\models\User;
+use app\models\entities\User;
 use app\models\repositories\UserRepository;
 use app\services\AuthCheck;
 use app\interfaces\IRenderer;
