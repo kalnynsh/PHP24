@@ -14,4 +14,18 @@ class Category extends DataEntity
      */
     public $id;
     public $name;
+
+    /**
+     * Category's constructor
+     *
+     * @param int    $id   - category's ID
+     * @param string $name - category's name
+     */
+    public function __construct(
+        $id = null,
+        $name = null
+    ) {
+        $this->id = $id;
+        $this->name = $name;
+    }
 }
