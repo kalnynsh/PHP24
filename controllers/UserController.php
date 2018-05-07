@@ -17,6 +17,7 @@ namespace app\controllers;
 use app\models\User;
 use app\models\repositories\UserRepository;
 use app\services\AuthCheck;
+use app\interfaces\IRenderer;
 
 /**
  * User Controller
@@ -28,8 +29,9 @@ class UserController extends Controller
     /**
      * Init property with AuthCheck entity
      */
-    public function __construct()
+    public function __construct(IRenderer $renderEngine)
     {
+        parent::__construct($renderEngine);
         $this->_authCheck = new AuthCheck();
     }
 
