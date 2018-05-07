@@ -2,7 +2,7 @@
 
 namespace app\models\repositories;
 
-use app\models\Image;
+use app\models\entities\Image;
 use app\models\Repository;
 
 /**

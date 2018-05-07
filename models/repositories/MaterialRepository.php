@@ -2,7 +2,7 @@
 
 namespace app\models\repositories;
 
-use app\models\Material;
+use app\models\entities\Material;
 use app\models\Repository;
 
 /**

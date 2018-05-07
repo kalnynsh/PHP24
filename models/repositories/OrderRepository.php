@@ -2,7 +2,7 @@
 
 namespace app\models\repositories;
 
-use app\models\Order;
+use app\models\entities\Order;
 use app\models\Repository;
 
 /**

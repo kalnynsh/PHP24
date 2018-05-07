@@ -2,7 +2,7 @@
 
 namespace app\models\repositories;
 
-use app\models\User;
+use app\models\entities\User;
 use app\models\Repository;
 
 /**
