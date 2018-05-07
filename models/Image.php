@@ -20,12 +20,22 @@ class Image extends DataEntity
     public $updated_at;
 
     /**
-     * Return DB table name
+     * Image's constructor
      *
-     * @return string
+     * @param int    $id           - Image's ID
+     * @param string $image_name   - Image's name
+     * @param string $date_created - creation date, time 
+     * @param string $date_updated - update date, time  
      */
-    public static function getTableName() : string
-    {
-        return 'images';
+    public function __construct(
+        $id = null,
+        $image_name = null,
+        $date_created = null,
+        $date_updated = null
+    ) {
+        $this->id = $id;
+        $this->image_name = $image_name;
+        $this->date_created = $date_created;
+        $this->date_updated = $date_updated;
     }
 }
