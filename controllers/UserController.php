@@ -18,6 +18,7 @@ use app\models\entities\User;
 use app\models\repositories\UserRepository;
 use app\services\AuthCheck;
 use app\interfaces\IRenderer;
+use app\services\Session;
 
 /**
  * User Controller
@@ -90,4 +91,19 @@ class UserController extends Controller
         echo $this->render('login', $params);
     }
 
+    /**
+     * Logout action
+     *
+     * @return void
+     */
+    public function actionLogout()
+    {
+        if ((new Session)::getInstance()->destroy()) {
+            $message = 'Спасибо за покупки!';
+            $this->redirect('/index.php');
+            exit();
+        }
+
+        return false;
+    }
 }
