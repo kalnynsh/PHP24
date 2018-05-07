@@ -73,8 +73,10 @@ class UserController extends Controller
                 exit();
             }
 
-            $userEntity = new User($login, $pswd, null, $lastLogin);
-            $userDb = (new UserRepository($userEntity))->getUser();
+            $pswdHash = password_hash($pswd, PASSWORD_DEFAULT);
+            $userEntity = new User('', $login, '', $pswd, $pswdHash, $lastLogin);
+
+            $userDb = (new UserRepository())->getUser($userEntity);
 
             if ($userDb) {
                 $this->_authCheck->setSessionParams($userDb);
