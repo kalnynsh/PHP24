@@ -21,8 +21,13 @@ class TemplateRenderer implements IRenderer
         ob_start();
         extract($params);
         $templatePath = TEMPLATES_DIR . '/' . $template . 'Tmpl.php';
-        include_once $templatePath;
-
+        if (\file_exists($templatePath)) {
+            include_once $templatePath;
+        } else {
+            throw new \Exception(
+                sprintf('This %s file not exists', $templatePath)
+            );
+        }
         return ob_get_clean();
     }
 }
