@@ -1,6 +1,8 @@
 <?php
 namespace app\services;
 
+// use app\models\entities\User;
+use app\models\entities\DataEntity;
 
 class AuthCheck
 {
@@ -35,7 +37,7 @@ class AuthCheck
      *
      * @return string - userId or null
      */
-    public function getUserID() : string
+    public function getUserId() : string
     {
         $user = $this->currentSession->get('user');
 
@@ -57,9 +59,12 @@ class AuthCheck
      */
     public function setSessionParams(DataEntity $userEntity) : void
     {
-        $this->currentSession->set('user', ['userID' => $userEntity->id]);
-        $this->currentSession->set('user', ['isAuth' => true]);
-        $this->currentSession->set('user', ['name' => $userEntity->name]);
+        $sessionUserParams = [
+            'userId' => $userEntity->id,
+            'isAuth' => true,
+            'name' => $userEntity->name,
+        ];
+        $this->currentSession->set('user', $sessionUserParams);
     }
 
     /**
