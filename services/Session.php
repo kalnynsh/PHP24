@@ -46,11 +46,11 @@ class Session
      **/
     public function startSession() : bool
     {
-        if ($this->sessionState == self::SESSION_NOT_STARTED) {
-            $this->sessionState = session_start();
+        if ($this->_sessionState == self::SESSION_NOT_STARTED) {
+            $this->_sessionState = session_start();
         }
 
-        return $this->sessionState;
+        return $this->_sessionState;
     }
 
     /**
@@ -114,11 +114,11 @@ class Session
      **/
     public function destroy()
     {
-        if ($this->sessionState == self::SESSION_STARTED) {
-            $this->sessionState = !session_destroy();
+        if ($this->_sessionState == self::SESSION_STARTED) {
+            $this->_sessionState = !session_destroy();
             unset($_SESSION);
 
-            return !$this->sessionState;
+            return !$this->_sessionState;
         }
 
         return false;
