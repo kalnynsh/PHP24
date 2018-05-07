@@ -2,6 +2,7 @@
 
 namespace app\models\repositories;
 
+use app\models\entities\DataEntity;
 use app\models\entities\User;
 use app\models\Repository;
 
@@ -43,7 +44,7 @@ class UserRepository extends Repository
     public function getUser(DataEntity $userEntity)
     {
         $sql = sprintf(
-            "SELECT * FROM `%s` WHERE `login` = `:login`",
+            "SELECT * FROM `%s` WHERE `login` = :login",
             $this->getTableName()
         );
         $stmt = $this->db->prepare($sql);
@@ -56,14 +57,21 @@ class UserRepository extends Repository
         $params = [':login' => $userEntity->login];
         $stmt->execute($params);
 
+        $info = $stmt->errorInfo();
+        if ($info[0] !== \PDO::ERR_NONE) {
+            die('We have : ' . $info[2]);
+        }
         $userObj = $stmt->fetch();
 
-        if (password_verify(
-            $userEntity->password,
-            $userObj->password_hash
-        )) {
-            return $userObj;
+        if ($userObj !== false) {
+            if (password_verify(
+                $userEntity->password,
+                $userObj->password_hash
+            )) {
+                return $userObj;
+            }
         }
+        // echo sprintf('Object %s not found', $userEntity->login);
 
         return false;
     }
