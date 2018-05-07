@@ -4,6 +4,15 @@ namespace app\services;
 
 class AuthCheck
 {
+    protected $currentSession;
+
+    /**
+     * AuthCheck's class constructor
+     */
+    public function __construct()
+    {
+        $this->currentSession = Session::getInstance();
+    }
     /**
      * Return user's status from SESSION
      *
@@ -12,8 +21,9 @@ class AuthCheck
     public function isAuth()
     {
         $isAuth = false;
+        $user = $this->currentSession->get('user');
 
-        if (isset($_SESSION['user']['isAuth']) && $_SESSION['user']['isAuth']) {
+        if (isset($user['isAuth']) && $user['isAuth']) {
             $isAuth = true;
         }
 
@@ -21,19 +31,21 @@ class AuthCheck
     }
 
     /**
-     * Return userID from SESSION
+     * Return user ID from SESSION
      *
-     * @return string - userID or ''
+     * @return string - userId or null
      */
     public function getUserID() : string
     {
-        if (isset($_SESSION['user']['userID'])) {
-            $userID = $_SESSION['user']['userID'];
+        $user = $this->currentSession->get('user');
+
+        if (isset($user['userId'])) {
+            $userId = $user['userId'];
         } else {
-            $userID = '';
+            $userId = null;
         }
 
-        return $userID;
+        return $userId;
     }
 
     /**
@@ -45,10 +57,9 @@ class AuthCheck
      */
     public function setSessionParams(DataEntity $userEntity) : void
     {
-        session_start();
-        $_SESSION['user']['userID'] = $userEntity->id;
-        $_SESSION['user']['isAuth'] = true;
-        $_SESSION['user']['name'] = $userEntity->name;
+        $this->currentSession->set('user', ['userID' => $userEntity->id]);
+        $this->currentSession->set('user', ['isAuth' => true]);
+        $this->currentSession->set('user', ['name' => $userEntity->name]);
     }
 
     /**
