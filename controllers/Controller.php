@@ -92,4 +92,16 @@ abstract class Controller
     {
         return $this->renderEngine->render($template, $params);
     }
+
+    /**
+     * Redirect to given URL
+     *
+     * @param string $url - URL
+     * 
+     * @return void
+     */
+    protected function redirect(string $url)
+    {
+        return header('Location: ' . $url);
+    }
 } 

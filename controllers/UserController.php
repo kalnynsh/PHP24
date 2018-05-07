@@ -71,12 +71,7 @@ class UserController extends Controller
                 exit();
             }
 
-            $userEntity = new User();
-            $userEntity->login = $login;
-            $userEntity->password = $pswd;
-            $userEntity->password_hash = null;
-            $userEntity->last_login = $lastLogin;
-
+            $userEntity = new User($login, $pswd, null, $lastLogin);
             $userDb = (new UserRepository($userEntity))->getUser();
 
             if ($userDb) {
@@ -91,15 +86,4 @@ class UserController extends Controller
         echo $this->render('login', $params);
     }
 
-    /**
-     * Redirect to given URL
-     *
-     * @param string $url - URL
-     * 
-     * @return void
-     */
-    protected function redirect(string $url)
-    {
-        return header('Location: ' . $url);
-    }
 }
