@@ -25,10 +25,11 @@ class Cart extends Model
      * Add product to cart
      *
      * @param Product $productEntity - product entity
+     * @param int     $amount        - product's amount
      * 
      * @return void
      */
-    public function add(Product $productEntity, $amount)
+    public function add(Product $productEntity, int $amount)
     {
         $items = [];
         $items[$productEntity->id] = $amount;
