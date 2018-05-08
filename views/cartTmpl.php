@@ -15,12 +15,12 @@
 </div>
 <div class="products">
     <?php if (count($products)) : ?>
-        <?php foreach ($products as $product) : ?>        
+        <?php foreach ($products as $productId => $product) : ?>        
             <div class="products__item">
-                <a href="/product.php?id=<?php echo $product[0]->id; ?>">
+                <a href="/product.php?id=<?php echo $productId; ?>">
                 <img width="200" 
                         src="/images/products_small/<?php 
-                                                    echo 'item-2' . $product[0]->image_id . '.jpg';
+                                                    echo 'item-2' . $productId . '.jpg';
                                                     ?>" 
                             alt="image">
                     <div class="product-description">
@@ -30,6 +30,7 @@
                         </p>
                         <p>Цена: <?php echo $product[0]->price; ?> руб.</p>
                         <p>Количество: <?php echo $product[1]; ?> шт.</p>
+                        <p>Подитог: <?php echo $product[2]; ?> руб.</p>
                     </div>
                 </a>
             </div>     
