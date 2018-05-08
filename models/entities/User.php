@@ -25,26 +25,23 @@ class User extends DataEntity
     /**
      * User's constractor
      *
-     * @param int    $id            - user's ID
-     * @param string $login         - user's login
-     * @param string $name          - user's name
-     * @param string $password      - password
-     * @param string $password_hash - password hash
-     * @param string $last_login    - date of las login
+     * @param int    $id         - user's ID
+     * @param string $login      - user's login
+     * @param string $name       - user's name
+     * @param string $password   - password
+     * @param string $last_login - date of las login
      */
     public function __construct(
         $id = null,
         $login = null,
         $name = null,
         $password = null,
-        $password_hash = null,
         $last_login = null
     ) {
         $this->id = $id;
         $this->login = $login;
         $this->name = $name;
         $this->password = $password;
-        $this->password_hash = $password_hash;
         $this->last_login = $last_login;
     }
 }
