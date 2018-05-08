@@ -47,7 +47,6 @@ class CartController extends Controller
      */
     public function actionIndex()
     {
-        $cart = $this->session->get('cart');
         $username = $this->session->get('user')['name'] ?? '';
 
         if ($this->cartModel->get()) {
@@ -84,10 +83,21 @@ class CartController extends Controller
                     FILTER_VALIDATE_INT
                 );
             }
+            $cartItems[] = [$productId => $productAmount];
+
             $username = $this->session->get('user')['name'];
-            $cartItems = [$productId => $productAmount];
-            $this->session->set('cart', $cartItems);
+            $cart = $this->session->get('cart');
+
+            if (!isset($cart)) {
+                $this->session->set('cart', $cartItems);
+            } else {
+                $cartNewItem = array_merge($cart, $cartItems);
+                $this->session->set('cart', $cartNewItem);
+            }
             $cartProducts = $this->cartModel->get();
+
+            // var_dump($_SESSION, $cartProducts);
+            // die();
 
             $params = [
                 'products' => $cartProducts,
