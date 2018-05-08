@@ -11,14 +11,14 @@ use app\models\entities\Product;
  */
 class Cart extends Model
 {
-    protected $currentSession;
+    protected $session;
 
     /**
      * Cart's class constructor
      */
     public function __construct()
     {
-        $this->currentSession = Session::getInstance();
+        $this->session = Session::getInstance();
     }
 
     /**
@@ -33,7 +33,7 @@ class Cart extends Model
     {
         $items = [];
         $items[$productEntity->id] = $amount;
-        $this->currentSession->set('cart', $items);
+        $this->session->set('cart', $items);
     }
 
     /**
@@ -45,9 +45,9 @@ class Cart extends Model
      */
     public function update(Product $productEntity, $newAmount)
     {
-        $cartItem = $this->currentSession->get('cart');
+        $cartItem = $this->session->get('cart');
         $cartItem[$productEntity->id] = $newAmount;
-        $this->currentSession->set('cart', $cartItem);
+        $this->session->set('cart', $cartItem);
     }
 
     /**
@@ -59,7 +59,7 @@ class Cart extends Model
      */
     public function remove(Product $productEntity)
     {
-        $cartItem = $this->currentSession->get('cart');
+        $cartItem = $this->session->get('cart');
         unset($cartItem[$productEntity->id]);
     }
 }
