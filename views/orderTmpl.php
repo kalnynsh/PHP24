@@ -2,6 +2,7 @@
     <?php if ($username) : ?>
         <p>Ваша корзина <?php echo $username; ?></p>
         <p>Номер Вашего Заказа: <?php echo $orderNumber; ?></p>
+        <p><?php echo $message; ?></p>
         <p>Спасибо за покупки!</p>
     <?php else : ?>
         <div>
