@@ -10,6 +10,8 @@ use app\models\entities\DataEntity;
 class AuthCheck
 {
     protected $currentSession;
+    const USER_AUTH = true;
+    const USER_NOT_AUTH = false;
 
     /**
      * AuthCheck's class constructor
@@ -25,11 +27,11 @@ class AuthCheck
      */
     public function isAuth()
     {
-        $isAuth = false;
+        $isAuth = self::USER_NOT_AUTH;
         $user = $this->currentSession->get('user');
 
         if (isset($user['isAuth']) && $user['isAuth']) {
-            $isAuth = true;
+            $isAuth = self::USER_AUTH;
         }
 
         return $isAuth;
