@@ -55,8 +55,10 @@ class CartController extends Controller
             $cartProducts = [];
         }
 
-        $cartSum = $cartProducts['sum'];
-        unset($cartProducts['sum']);
+        $cartSum = $cartProducts['sum'] ?? 0;
+        if ($cartSum) {
+            unset($cartProducts['sum']);
+        }
 
         $params = [
             'products' => $cartProducts,
