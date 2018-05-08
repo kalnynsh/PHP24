@@ -55,9 +55,13 @@ class CartController extends Controller
             $cartProducts = [];
         }
 
+        $cartSum = $cartProducts['sum'];
+        unset($cartProducts['sum']);
+
         $params = [
             'products' => $cartProducts,
             'username' => $username,
+            'cartSum' => $cartSum,
         ];
 
         echo $this->render('cart', $params);
@@ -95,13 +99,13 @@ class CartController extends Controller
                 $this->session->set('cart', $cartNewItem);
             }
             $cartProducts = $this->cartModel->get();
-
-            // var_dump($_SESSION, $cartProducts);
-            // die();
+            $cartSum = $cartProducts['sum'];
+            unset($cartProducts['sum']);
 
             $params = [
                 'products' => $cartProducts,
                 'username' => $username,
+                'cartSum' => $cartSum,
             ];
 
             echo $this->render('cart', $params);
