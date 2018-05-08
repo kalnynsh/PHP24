@@ -39,14 +39,13 @@ class Cart extends Model
             return self::NO_CART_ITEMS;
         }
 
-        // $productsIds = array_keys($cartItems);
-        $cartProducts = [];
-        $count = count($cartItems);
-
-        for ($i = 0; $i < $count; $i++) {
-            foreach ($cartItems as $productId => $amount) {
-                $cartProducts[$i][] = $this->productRepoDriver->getOne($productId);
-                $cartProducts[$i][] = $amount;
+        $cartProducts = array();
+        foreach ($cartItems as $item) {
+            foreach ($item as $productId => $amount) {
+                array_push(
+                    $cartProducts,
+                    array($this->productRepoDriver->getOne($productId), $amount)
+                );
             }
         }
 
