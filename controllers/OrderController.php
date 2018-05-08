@@ -17,6 +17,7 @@ namespace app\controllers;
 use app\interfaces\IRenderer;
 use app\models\Cart;
 use app\models\entities\Order;
+use app\models\repositories\OrderRepository;
 use app\services\Request;
 use app\services\Session;
 
@@ -82,11 +83,16 @@ class OrderController extends Controller
             }
         }
 
+        $orderRepoDriver = new OrderRepository();
 
-        var_dump($_SESSION, $cartProducts, $orderEntityArray);
-        die();
+        foreach ($orderEntityArray as $orderEntity) {
+            $orderRepoDriver->insert($orderEntity);
+        }
+
+        $this->session->set('cart', null);
 
         $params = [
+            'username' => $username,
             'orderNumber' => $orderNumber,
             'message' => $message,
         ];
