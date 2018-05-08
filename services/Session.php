@@ -54,19 +54,6 @@ class Session
     }
 
     /**
-     * Stores data in the session.
-     *    
-     * @param string $name  - Name of the data.
-     * @param mixed  $value - Your data.
-     * 
-     * @return void
-     **/
-    public function set($name, $value)
-    {
-        $_SESSION[$name] = $value;
-    }
-
-    /**
      * Gets data from the session.
      * Example: echo $_instance->get(userId);
      *    
@@ -81,6 +68,19 @@ class Session
         } else {
             return null;
         }
+    }
+
+    /**
+     * Stores data in the session.
+     *    
+     * @param string $name  - Name of the data.
+     * @param mixed  $value - Your data.
+     * 
+     * @return void
+     **/
+    public function set($name, $value)
+    {
+        $_SESSION[$name] = $value;
     }
 
     /**
