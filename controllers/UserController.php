@@ -74,9 +74,7 @@ class UserController extends Controller
                 exit();
             }
 
-            $pswdHash = password_hash($pswd, PASSWORD_DEFAULT);
-            $userEntity = new User('', $login, '', $pswd, $pswdHash, $lastLogin);
-
+            $userEntity = new User('', $login, '', $pswd, $lastLogin);
             $userDb = (new UserRepository())->getUser($userEntity);
 
             if ($userDb) {
