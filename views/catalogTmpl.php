@@ -8,7 +8,9 @@
         <div class="products__item">
             <a href="/index.php/product/card?id=<?php echo $product->id; ?>">
                 <img width="200" 
-                    src="/images/products_small/<?php echo 'item-2' . $product->image_id . '.jpg'; ?>" 
+                    src="/images/products_small/<?php 
+                                                echo 'item-2' . $product->image_id . '.jpg';
+                                                ?>"
                     alt="image">
                 <div class="product-description">
                     <p><?php echo $product->product_name; ?></p>
