@@ -1,15 +1,15 @@
 <?php
 
-/** 
+/**
  * Learning PHP
- * 
+ *
  * PHP version 7.2
- * 
+ *
  * @category Repository_Driver
  * @package  Model
  * @author   Kalnynsh <kda869@yandex.ru>
- * @license  http://example.com MIT 
- * @link     https://github.com/kalnynsh 
+ * @license  http://example.com MIT
+ * @link     https://github.com/kalnynsh
  */
 
 namespace app\models;
@@ -131,9 +131,9 @@ abstract class Repository
     }
 
     /**
-     * Delete row of data from DB child class table 
+     * Delete row of data from DB child class table
      * by self ID
-     * 
+     *
      * @param DataEntity $entity - given data object
      *
      * @return bool
@@ -159,7 +159,7 @@ abstract class Repository
 
     /**
      * Insert data to DB using class object property
-     * 
+     *
      * @param DataEntity $entity - given data object
      *
      * @return string - ID of last inserted row
@@ -177,8 +177,6 @@ abstract class Repository
             $params[":{$key}"] = $value;
             $columns[] = "`{$key}`";
         }
-        // $params[':id'] = null;
-        // $columns[] = 'id';
 
         $columns = implode(', ', $columns);
         $placeholders = implode(', ', array_keys($params));
@@ -206,9 +204,9 @@ abstract class Repository
 
     /**
      * Update given data to child class table
-     * 
+     *
      * @param DataEntity $entity - given data object
-     * 
+     *
      * @return bool
      */
     public function update(DataEntity $entity) : bool
@@ -247,9 +245,9 @@ abstract class Repository
     /**
      * Make choice insert() or update()
      * and calling insert or update method
-     * 
+     *
      * @param DataEntity $entity - given data object
-     * 
+     *
      */
     public function save(DataEntity $entity)
     {
@@ -262,7 +260,7 @@ abstract class Repository
 
     /**
      * Return array of DataEntity properties
-     * 
+     *
      * @return array
      */
     private function _getEntityClassPropsNames() : array
