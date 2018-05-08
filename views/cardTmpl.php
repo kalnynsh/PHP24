@@ -11,15 +11,15 @@
             <p>Цена: <?php echo $product->price; ?> руб.</p>            
         </div>
         <?php if ($is_login) : ?>
-            <form name="addtocart" action="/cart/add?id=<?php echo $product->id; ?>"
+            <form name="addtocart"                
+                action="/index.php/cart/add"
                 class="product-addtocart" 
                 method="POST">                
-                    <input type="hidden" name="id" 
-                        value="<?php echo $product->id; ?>">
+                    <input type="hidden" name="id" value="<?php echo $product->id; ?>">
                     <input type="number" name="amount" value="1" range="1-100">
                     <input type="submit" name="submit_add_to_cart" 
                         class="add-to-cart"                        
-                    value="Добавить в корзину">  
+                        value="Добавить в корзину">  
                     <input type="submit" name="submit_edit_cart"
                         class="edit_cart"
                         value="Изменить содержимое корзины">                
