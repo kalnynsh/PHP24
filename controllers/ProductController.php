@@ -63,10 +63,11 @@ class ProductController extends Controller
      */
     public function actionCard()
     {
+        $is_login = false;
         $id = filter_var((new Request())->getParams('id'), FILTER_VALIDATE_INT);
         $product = (new ProductRepository())->getOne($id);
 
-        $is_login = $this->session->get('user')['isAuth'] ?? false;
+        $is_login = $this->session->get('user')['isAuth'];
 
         $params = [
             'product' => $product,
