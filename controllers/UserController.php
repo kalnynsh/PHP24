@@ -80,7 +80,6 @@ class UserController extends Controller
             if ($userDb) {
                 $this->_authCheck->setSessionParams($userDb);
                 $this->redirect('/index.php');
-
                 exit();
             } else {
                 $message = "Неправильный логин или пароль!";
