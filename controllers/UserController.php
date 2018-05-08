@@ -84,6 +84,10 @@ class UserController extends Controller
                 $this->redirect('/index.php');
 
                 exit();
+            } else {
+                $message = "Неправильный логин или пароль!";
+                $this->redirect('/index.php/user/login');
+                exit();
             }
         }
 
