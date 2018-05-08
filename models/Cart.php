@@ -39,15 +39,23 @@ class Cart extends Model
             return self::NO_CART_ITEMS;
         }
 
+        $sum = 0.0;
         $cartProducts = array();
+
         foreach ($cartItems as $item) {
             foreach ($item as $productId => $amount) {
-                array_push(
-                    $cartProducts,
-                    array($this->productRepoDriver->getOne($productId), $amount)
-                );
+                $productObject = $this->productRepoDriver->getOne($productId);
+                $subtotal = $productObject->price * $amount;
+                $sum = $sum + $subtotal;
+
+                $cartProducts[$productObject->id] = [
+                    $productObject,
+                    $amount,
+                    $subtotal
+                ];
             }
         }
+        $cartProducts['sum'] = $sum;
 
         return $cartProducts;
     }
