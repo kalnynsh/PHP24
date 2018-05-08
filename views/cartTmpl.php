@@ -46,11 +46,11 @@
         <a href="/index.php">Продолжить выбор</a>
     </button>
     <button>
-        <a href="/order.php">Оформить покупки</a>
+        <a href="/index.php/order/index">Оформить покупки</a>
     </button>
-    <!-- <button>
+    <button>
         <a href="/index.php/user/login">Войти</a>
-    </button> -->
+    </button>
     <button>
         <a href="/index.php/user/logout">Выйти</a>
     </button>
