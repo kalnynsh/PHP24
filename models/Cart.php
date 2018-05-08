@@ -5,13 +5,17 @@ namespace app\models;
 use app\services\Session;
 use app\models\entities\User;
 use app\models\entities\Product;
+use app\models\repositories\ProductRepository;
+use app\services\Request;
 
 /**
  * Cart class
  */
 class Cart extends Model
 {
+    const NO_CART_ITEMS = false;
     protected $session;
+    protected $productModel;
 
     /**
      * Cart's class constructor
@@ -19,6 +23,34 @@ class Cart extends Model
     public function __construct()
     {
         $this->session = Session::getInstance();
+        $this->productRepoDriver = new ProductRepository();
+    }
+
+    /**
+     * Get products from cart
+     *
+     * @return void
+     */
+    public function get()
+    {
+        $cartItems = $this->session->get('cart');
+
+        if (!$cartItems) {
+            return self::NO_CART_ITEMS;
+        }
+
+        // $productsIds = array_keys($cartItems);
+        $cartProducts = [];
+        $count = count($cartItems);
+
+        for ($i = 0; $i < $count; $i++) {
+            foreach ($cartItems as $productId => $amount) {
+                $cartProducts[$i][] = $this->productRepoDriver->getOne($productId);
+                $cartProducts[$i][] = $amount;
+            }
+        }
+
+        return $cartProducts;
     }
 
     /**
@@ -31,6 +63,8 @@ class Cart extends Model
      */
     public function add(Product $productEntity, int $amount)
     {
+        $id = filter_var((new Request())->getParams('id'), FILTER_VALIDATE_INT);
+
         $items = [];
         $items[$productEntity->id] = $amount;
         $this->session->set('cart', $items);
