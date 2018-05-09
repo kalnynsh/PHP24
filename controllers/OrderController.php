@@ -18,7 +18,6 @@ use app\interfaces\IRenderer;
 use app\models\Cart;
 use app\models\entities\Order;
 use app\models\repositories\OrderRepository;
-use app\services\Request;
 use app\services\Session;
 
 /**
@@ -28,6 +27,7 @@ class OrderController extends Controller
 {
     protected $session;
     protected $cartModel;
+    protected $orderRepoDriver;
 
     /**
      * Init property $renderer setting to passing 
@@ -40,6 +40,7 @@ class OrderController extends Controller
         parent::__construct($renderEngine);
         $this->session = (new Session)::getInstance();
         $this->cartModel = new Cart();
+        $this->orderRepoDriver = new OrderRepository();
     }
 
     /**
@@ -83,10 +84,8 @@ class OrderController extends Controller
             }
         }
 
-        $orderRepoDriver = new OrderRepository();
-
         foreach ($orderEntityArray as $orderEntity) {
-            $orderRepoDriver->insert($orderEntity);
+            $this->orderRepoDriver->insert($orderEntity);
         }
 
         $this->session->set('cart', null);
