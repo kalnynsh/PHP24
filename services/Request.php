@@ -1,6 +1,17 @@
 <?php
 
 namespace app\services;
+
+/**
+ * BadRequestException class for throw 
+ * new Exception, $message='Invalid Request', $code=404
+ */
+class BadRequestException extends \Exception
+{
+    protected $message = 'Invalid Request';
+    protected $code = 404;
+}
+
 /**
  * Class for parsing URI
  */
@@ -49,8 +60,7 @@ class Request
             $this->controllerName = $matches['controller'][0];
             $this->actionName = $matches['action'][0];
         } else {
-            // echo 'Matches not found';
-            return false;
+            throw new BadRequestException();
         }
     }
 
