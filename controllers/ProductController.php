@@ -74,7 +74,7 @@ class ProductController extends Controller
 
         if (!$product) {
             throw new ProductNotFoundException();
-            redirect('/index.php');
+            redirect('/index.php/notfound');
         }
 
         $is_login = $this->session->get('user')['isAuth'];
