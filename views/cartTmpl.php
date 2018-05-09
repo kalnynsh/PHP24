@@ -17,7 +17,7 @@
     <?php if (count($products)) : ?>
         <?php foreach ($products as $productId => $product) : ?>        
             <div class="products__item">
-                <a href="/product.php?id=<?php echo $productId; ?>">
+                <a href="/index.php/product/card?id=<?php echo $productId; ?>">
                 <img width="200" 
                         src="/images/products_small/<?php 
                                                     echo 'item-2' . $productId . '.jpg';
