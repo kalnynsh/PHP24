@@ -18,6 +18,7 @@ use app\interfaces\IRenderer;
 use app\models\repositories\ProductRepository;
 use app\services\Request;
 use app\services\Session;
+use app\services\ProductNotFoundException;
 
 /**
  * Product Controller
@@ -70,6 +71,10 @@ class ProductController extends Controller
         $is_login = false;
         $id = filter_var($this->request->getParams('id'), FILTER_VALIDATE_INT);
         $product = $this->repoProductDriver->getOne($id);
+
+        if (!$product) {
+            throw new ProductNotFoundException();
+        }
 
         $is_login = $this->session->get('user')['isAuth'];
 
