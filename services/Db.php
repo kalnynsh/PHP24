@@ -95,4 +95,13 @@ class Db
     private function __wakeup()
     {
     }
+    /**
+     * Sting representation
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return 'Db';
+    }
 }
