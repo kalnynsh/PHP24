@@ -29,7 +29,7 @@ class Cart extends Model
     /**
      * Get products from cart
      *
-     * @return void
+     * @return array of products objects and 'sum'=>100.00
      */
     public function get()
     {
