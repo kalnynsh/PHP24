@@ -97,7 +97,7 @@ class CartController extends Controller
                 $cart = $this->session->get('cart');
 
                 if (!isset($cart)) {
-                    $cartCreateItem = [0 => [$productId => $productAmount]]; // [ 0 => [1 => 3] ]
+                    $cartCreateItem = [0 => [$productId => $productAmount]];
                     $this->session->set('cart', $cartCreateItem);
                 } else {
                     $cartCount = count($cart);
