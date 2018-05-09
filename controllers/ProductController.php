@@ -25,6 +25,8 @@ use app\services\Session;
 class ProductController extends Controller
 {
     protected $session;
+    protected $repoProductDriver;
+    protected $request;
 
     /**
      * Init property $renderer setting to passing 
@@ -36,6 +38,8 @@ class ProductController extends Controller
     {
         parent::__construct($renderEngine);
         $this->session = (new Session)::getInstance();
+        $this->repoProductDriver = new ProductRepository();
+        $this->request = new Request();
     }
 
     /**
@@ -45,7 +49,7 @@ class ProductController extends Controller
      */
     public function actionIndex()
     {
-        $products = (new ProductRepository())->getAll();
+        $products = $this->repoProductDriver->getAll();
         $username = $this->session->get('user')['name'] ?? '';
 
         $params = [
@@ -64,8 +68,8 @@ class ProductController extends Controller
     public function actionCard()
     {
         $is_login = false;
-        $id = filter_var((new Request())->getParams('id'), FILTER_VALIDATE_INT);
-        $product = (new ProductRepository())->getOne($id);
+        $id = filter_var($this->request->getParams('id'), FILTER_VALIDATE_INT);
+        $product = $this->repoProductDriver->getOne($id);
 
         $is_login = $this->session->get('user')['isAuth'];
 
