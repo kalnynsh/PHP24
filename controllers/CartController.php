@@ -26,6 +26,8 @@ class CartController extends Controller
 {
     protected $session;
     protected $cartModel;
+    const NEW_PRODUCT = true;
+    const OLD_PRODUCT = true;
 
     /**
      * Init property $renderer setting to passing 
@@ -79,7 +81,9 @@ class CartController extends Controller
         $message = '';
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if (isset($_POST['submit_add_to_cart'])) {
+            if (isset($_POST['submit_add_to_cart'])
+                || isset($_POST['submit_edit_cart'])) {
+
                 $productId = filter_var(
                     $_POST['id'],
                     FILTER_VALIDATE_INT
@@ -88,33 +92,49 @@ class CartController extends Controller
                     $_POST['amount'],
                     FILTER_VALIDATE_INT
                 );
+
+                $username = $this->session->get('user')['name'];
+                $cart = $this->session->get('cart');
+
+                if (!isset($cart)) {
+                    $cartCreateItem = [0 => [$productId => $productAmount]]; // [ 0 => [1 => 3] ]
+                    $this->session->set('cart', $cartCreateItem);
+                } else {
+                    $cartCount = count($cart);
+                    $idx = 0;
+
+                    foreach ($cart as $Item) {
+                        if (!array_key_exists($productId, $Item)) {
+                            $cartAddItem = [
+                                ($cartCount + 1) => [$productId => $productAmount]
+                            ];
+                            $cartNewItem = array_merge($cart, $cartAddItem);
+                        } else {
+                            $cartUpdateItem = [
+                                $idx => [$productId => $productAmount]
+                            ];
+                            $cartNewItem = array_replace($cart, $cartUpdateItem);
+                        }
+                        $idx++;
+                    }
+                    unset($idx);
+
+                    $this->session->set('cart', $cartNewItem);
+                }
+
+                $cartProducts = $this->cartModel->get();
+                $cartSum = $cartProducts['sum'];
+                unset($cartProducts['sum']);
+
+                $params = [
+                    'products' => $cartProducts,
+                    'username' => $username,
+                    'cartSum' => $cartSum,
+                ];
+                echo $this->render('cart', $params);
             }
-            $cartItems[] = [$productId => $productAmount];
-
-            $username = $this->session->get('user')['name'];
-            $cart = $this->session->get('cart');
-
-            if (!isset($cart)) {
-                $this->session->set('cart', $cartItems);
-            } else {
-                $cartNewItem = array_merge($cart, $cartItems);
-                $this->session->set('cart', $cartNewItem);
-            }
-            $cartProducts = $this->cartModel->get();
-            $cartSum = $cartProducts['sum'];
-            unset($cartProducts['sum']);
-
-            $params = [
-                'products' => $cartProducts,
-                'username' => $username,
-                'cartSum' => $cartSum,
-            ];
-
-            echo $this->render('cart', $params);
         }
-
         $params = ['message' => $message, ];
         echo $this->render('cart', $params);
     }
-
 }
