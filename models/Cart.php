@@ -6,7 +6,7 @@ use app\services\Session;
 use app\models\entities\User;
 use app\models\entities\Product;
 use app\models\repositories\ProductRepository;
-use app\services\Request;
+use app\base\App;
 
 /**
  * Cart class
@@ -16,6 +16,7 @@ class Cart extends Model
     const NO_CART_ITEMS = false;
     protected $session;
     protected $productModel;
+    protected $request;
 
     /**
      * Cart's class constructor
@@ -24,6 +25,7 @@ class Cart extends Model
     {
         $this->session = Session::getInstance();
         $this->productRepoDriver = new ProductRepository();
+        $this->request = App::call()->request;
     }
 
     /**
@@ -70,7 +72,7 @@ class Cart extends Model
      */
     public function add(Product $productEntity, int $amount)
     {
-        $id = filter_var((new Request())->getParams('id'), FILTER_VALIDATE_INT);
+        $id = filter_var($this->request->getParams('id'), FILTER_VALIDATE_INT);
 
         $items = [];
         $items[$productEntity->id] = $amount;
