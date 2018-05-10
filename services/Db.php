@@ -2,40 +2,41 @@
 
 namespace app\services;
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/../config/db.php';
-
 /**
  * Class DB manage database using \PDO
  */
 class Db
 {
-    private static $_config = [
-        'driver' => DB_CONNECTION,
-        'host' => DB_HOST,
-        'login' => DB_USERNAME,
-        'password' => DB_PASSWORD,
-        'database' => DB_DATABASE,
-        'charset' => 'utf8'
-    ];
-
+    private $_config;
     /** 
-     * @var \PDO $_conn - \PDO object 
+     * @var \PDO $_connection - \PDO object 
      */
-    private static $_instance = null;
+    private $_connection;
 
     /**
-     * Return only one instance of Db class
-     * Usage Db::getInstance() 
-     * 
-     * @return \PDO    
+     * Db's constructor
+     *
+     * @param string $driver   - driver
+     * @param string $host     - host
+     * @param string $login    - login
+     * @param string $password - password
+     * @param string $database - database
+     * @param string $charset  - charset
      */
-    public static function getInstance()
-    {
-        if (is_null(static::$_instance)) {
-            static::$_instance = static::_getConnection();
-        }
-
-        return static::$_instance;
+    public function __construct(
+        $driver,
+        $host,
+        $login,
+        $password,
+        $database,
+        $charset = "utf8"
+    ) {
+        $this->_config['driver'] = $driver;
+        $this->_config['host'] = $host;
+        $this->_config['login'] = $login;
+        $this->_config['password'] = $password;
+        $this->_config['database'] = $database;
+        $this->_config['charset'] = $charset;
     }
 
     /**
@@ -43,19 +44,20 @@ class Db
      *
      * @return \PDO
      */
-    private static function _getConnection() : \PDO
+    public function getConnection() : \PDO
     {
-        $options = [
-            \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
-            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
-        ];
-        $_connection = new \PDO(
-            static::_prepareDsnString(),
-            static::$_config['login'],
-            static::$_config['password'],
-            $options
-        );
-
+        if (is_null($this->_connection)) {
+            $options = [
+                \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
+                \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION
+            ];
+            $_connection = new \PDO(
+                $this->_prepareDsnString(),
+                $this->_config['login'],
+                $this->$_config['password'],
+                $options
+            );
+        }
         return $_connection;
     }
 
@@ -64,39 +66,19 @@ class Db
      *
      * @return string
      */
-    private static function _prepareDsnString() : string
+    private function _prepareDsnString() : string
     {
         return sprintf(
             "%s:host=%s;dbname=%s;charset=%s",
-            static::$_config['driver'],
-            static::$_config['host'],
-            static::$_config['database'],
-            static::$_config['charset']
+            $this->_config['driver'],
+            $this->_config['host'],
+            $this->_config['database'],
+            $this->_config['charset']
         );
     }
 
     /**
-     * Empty __construct method
-     */
-    private function __construct()
-    {
-    }
-
-    /**
-     * Empty __clone method
-     */
-    private function __clone()
-    {
-    }
-
-    /**
-     * Empty __wakeup method
-     */
-    private function __wakeup()
-    {
-    }
-    /**
-     * Sting representation
+     * String representation
      *
      * @return string
      */
