@@ -16,9 +16,9 @@ namespace app\controllers;
 
 use app\interfaces\IRenderer;
 use app\models\repositories\ProductRepository;
-use app\services\Request;
 use app\services\Session;
-use app\services\ProductNotFoundException;
+use app\services\NotFoundException;
+use app\base\App;
 
 /**
  * Product Controller
@@ -40,7 +40,7 @@ class ProductController extends Controller
         parent::__construct($renderEngine);
         $this->session = (new Session)::getInstance();
         $this->repoProductDriver = new ProductRepository();
-        $this->request = new Request();
+        $this->request = App::call()->request;
     }
 
     /**
@@ -73,7 +73,7 @@ class ProductController extends Controller
         $product = $this->repoProductDriver->getOne($id);
 
         if (!$product) {
-            throw new ProductNotFoundException();
+            throw new NotFoundException();
             redirect('/index.php/notfound');
         }
 
