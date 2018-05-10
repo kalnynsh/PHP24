@@ -14,7 +14,7 @@
 
 namespace app\models;
 
-use app\services\Db;
+use app\base\App;
 use app\models\entities\DataEntity;
 
 /**
@@ -29,7 +29,7 @@ abstract class Repository
      */
     public function __construct()
     {
-        $this->db = Db::getInstance();
+        $this->db = App::call()->db->getConnection();
     }
 
     /**
