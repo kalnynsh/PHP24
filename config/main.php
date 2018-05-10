@@ -1,5 +1,17 @@
 <?php
 
+/** 
+ * Learning PHP
+ * 
+ * PHP version 7.2
+ * 
+ * @category Learning_PHP
+ * @package  Configuration
+ * @author   Kalnynsh <kda869@yandex.ru>
+ * @license  http://example.com MIT 
+ * @link     https://github.com/kalnynsh 
+ */
+
 return [
     'root_dir' => __DIR__ . '/../',
     'templates_dir' => __DIR__ . '/../views/',
