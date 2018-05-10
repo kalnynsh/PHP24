@@ -54,7 +54,7 @@ class Db
             $_connection = new \PDO(
                 $this->_prepareDsnString(),
                 $this->_config['login'],
-                $this->$_config['password'],
+                $this->_config['password'],
                 $options
             );
         }
