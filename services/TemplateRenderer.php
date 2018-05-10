@@ -1,6 +1,7 @@
 <?php
 namespace app\services;
 
+use app\base\App;
 use app\interfaces\IRenderer;
 
 /**
@@ -20,7 +21,9 @@ class TemplateRenderer implements IRenderer
     {
         ob_start();
         extract($params);
-        $templatePath = TEMPLATES_DIR . '/' . $template . 'Tmpl.php';
+        $templatePath
+            = App::call()->config['templates_dir'] . $template . 'Tmpl.php';
+
         if (\file_exists($templatePath)) {
             include_once $templatePath;
         } else {
@@ -28,6 +31,7 @@ class TemplateRenderer implements IRenderer
                 sprintf('This %s file not exists', $templatePath)
             );
         }
+
         return ob_get_clean();
     }
 }
