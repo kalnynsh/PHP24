@@ -30,6 +30,7 @@ class App
      * @var Request
      */
     private $_action;
+    const DEFAULT_URI = 'product';
 
     /**
      * Static function
@@ -89,7 +90,7 @@ class App
     public function runController()
     {
         $this->_controller
-            = $this->request->getControllerName() ? : 'product';
+            = $this->request->getControllerName() ? : self::DEFAULT_URI;
         $this->_action = $this->request->getActionName();
 
         $controllerClass
