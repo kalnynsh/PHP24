@@ -46,13 +46,17 @@ class Request
         //     = "#[/]?(?P<controller>\w+)[/]?(?P<action>\w+)?[/]?[?]?(?P<params>.*)#ui"; 
 
         $pattern
-            = "#[/]?index.php[/]?(?P<controller>\w+)[/]?(?P<action>\w+)?[/]?[?]?(?P<params>.*)#ui";
+            = "#[/]?index.php
+            [/]?(?P<controller>\w+)[/]?
+            (?P<action>\w+)?[/]?
+            [?]?(?P<params>.*)?#ix";
 
         if (preg_match_all($pattern, $this->requestString, $matches)) {
             $this->controllerName = $matches['controller'][0];
             $this->actionName = $matches['action'][0];
         } else {
-            throw new BadRequestException();
+            // throw new BadRequestException();
+            return false;
         }
     }
 
