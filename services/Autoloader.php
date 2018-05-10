@@ -2,42 +2,40 @@
 
 namespace app\services;
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/../config/main.php';
-require_once ROOT_DIR . '/config/app.php';
-
 /**
  * Class using for autoload classes
  */
 class Autoloader
 {
     private $_fileExtension = '.php';
-    private $_app = APP_NAME . '\\';
 
     /**
      * Include class
      *
-     * @param string $className - class name
+     * @param string $className - class's name
      * 
      * @return bool
      */
     public function loadClass($className)
     {
         $className = str_replace(
-            [$this->_app, '\\'],
+            ['app\\', '\\'],
             [
-                ROOT_DIR . DIRECTORY_SEPARATOR,
-                DIRECTORY_SEPARATOR
+                __DIR__ . '/../', DS
             ],
             $className
         );
+
         $className .= $this->_fileExtension;
 
         if (file_exists($className)) {
             include_once $className;
+
             return true;
         }
 
-        echo 'File or class not exists';
+        echo \sprintf('%s not exists', $className);
+
         return false;
     }
 }
