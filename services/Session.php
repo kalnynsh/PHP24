@@ -12,9 +12,6 @@ class Session
     
     // The state of the session
     private $_sessionState = self::SESSION_NOT_STARTED;
-    
-    // THE only instance of the class
-    private $_instance;
 
     /**
      * Empty contructor
