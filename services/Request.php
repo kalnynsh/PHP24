@@ -19,6 +19,7 @@ class Request
      */
     protected $params = [];
     protected $method;
+    protected $post;
 
     const POST_METHOD = 'post';
 
@@ -31,6 +32,7 @@ class Request
         $this->requestString = $_SERVER['REQUEST_URI'];
         $this->method = $_SERVER['REQUEST_METHOD'];
         $this->params = $_REQUEST ? : [];
+        $this->post = $_POST;
         $this->parseRequest();
     }
 
@@ -99,6 +101,17 @@ class Request
     public function getMethod() : string
     {
         return $this->method;
+    }
+
+    /**
+     * Get POST value by key
+     * like ['field_name' => 'field_value']
+     * 
+     * @return mixed
+     */
+    public function getPost($key = null)
+    {
+        return $this->getArr($this->post, $key);
     }
 
     /**
