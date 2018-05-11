@@ -16,18 +16,18 @@ namespace app\controllers;
 
 use app\interfaces\IRenderer;
 use app\models\Cart;
-use app\services\Request;
-use app\services\Session;
+use app\base\App;
 
 /**
  * Cart Controller
  */
 class CartController extends Controller
 {
-    protected $session;
-    protected $cartModel;
     const NEW_PRODUCT = true;
     const OLD_PRODUCT = true;
+    protected $session;
+    protected $cartModel;
+    protected $request;
 
     /**
      * Init property $renderer setting to passing 
@@ -38,7 +38,8 @@ class CartController extends Controller
     public function __construct(IRenderer $renderEngine)
     {
         parent::__construct($renderEngine);
-        $this->session = (new Session)::getInstance();
+        $this->session = App::call()->session;
+        $this->request = App::call()->request;
         $this->cartModel = new Cart();
     }
 
@@ -78,20 +79,14 @@ class CartController extends Controller
      */
     public function actionAdd()
     {
-        $message = '';
+        if ($this->request->isPost()) {
+            if (!is_null($this->request->getPost('submit_add_to_cart'))
+                || !is_null($this->request->getPost('submit_edit_cart'))) {
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if (isset($_POST['submit_add_to_cart'])
-                || isset($_POST['submit_edit_cart'])) {
+                $productId = $this->validateInt($this->request->getPost('id'));
 
-                $productId = filter_var(
-                    $_POST['id'],
-                    FILTER_VALIDATE_INT
-                );
-                $productAmount = filter_var(
-                    $_POST['amount'],
-                    FILTER_VALIDATE_INT
-                );
+                $productAmount
+                    = $this->validateInt($this->request->getPost('amount'));
 
                 $username = $this->session->get('user')['name'];
                 $cart = $this->session->get('cart');
@@ -134,7 +129,19 @@ class CartController extends Controller
                 echo $this->render('cart', $params);
             }
         }
+
+        $message = '';
         $params = ['message' => $message, ];
         echo $this->render('cart', $params);
+    }
+
+    /**
+     * Validate given value using FILTER_VALIDATE_INT
+     *
+     * @return integer
+     */
+    protected function validateInt($value) : integer
+    {
+        return filter_var($value, FILTER_VALIDATE_INT);
     }
 }
