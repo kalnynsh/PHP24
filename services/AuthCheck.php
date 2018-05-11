@@ -1,7 +1,7 @@
 <?php
 namespace app\services;
 
-// use app\models\entities\User;
+use app\base\App;
 use app\models\entities\DataEntity;
 /**
  * Class check user's credentials,
@@ -18,7 +18,7 @@ class AuthCheck
      */
     public function __construct()
     {
-        $this->currentSession = Session::getInstance();
+        $this->currentSession = App::call()->session;
     }
     /**
      * Return user's status from SESSION
