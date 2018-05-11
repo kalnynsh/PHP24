@@ -18,7 +18,7 @@ use app\interfaces\IRenderer;
 use app\models\Cart;
 use app\models\entities\Order;
 use app\models\repositories\OrderRepository;
-use app\services\Session;
+use app\base\App;
 
 /**
  * Cart Controller
@@ -38,7 +38,7 @@ class OrderController extends Controller
     public function __construct(IRenderer $renderEngine)
     {
         parent::__construct($renderEngine);
-        $this->session = (new Session)::getInstance();
+        $this->session = App::call()->session;
         $this->cartModel = new Cart();
         $this->orderRepoDriver = new OrderRepository();
     }
