@@ -16,9 +16,8 @@ namespace app\controllers;
 
 use app\interfaces\IRenderer;
 use app\models\repositories\ProductRepository;
-use app\services\Session;
-use app\services\NotFoundException;
 use app\base\App;
+use app\services\NotFoundException;
 
 /**
  * Product Controller
@@ -38,7 +37,7 @@ class ProductController extends Controller
     public function __construct(IRenderer $renderEngine)
     {
         parent::__construct($renderEngine);
-        $this->session = (new Session)::getInstance();
+        $this->session = App::call()->session;
         $this->repoProductDriver = new ProductRepository();
         $this->request = App::call()->request;
     }
