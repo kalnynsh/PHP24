@@ -32,5 +32,8 @@ return [
         'session' => [
             'class' => \app\services\Session::class,
         ],
+        'validator' => [
+            'class' => \app\services\Validator::class,
+        ],
     ],
 ];
