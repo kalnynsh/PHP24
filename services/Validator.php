@@ -33,7 +33,7 @@ class Validator
      * 
      * @return integer
      */
-    public function validateInt($value) : integer
+    public function validateInt($value)
     {
         return filter_var($value, FILTER_VALIDATE_INT);
     }
