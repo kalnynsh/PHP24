@@ -27,6 +27,7 @@ class ProductController extends Controller
     protected $session;
     protected $repoProductDriver;
     protected $request;
+    protected $validator;
 
     /**
      * Init property $renderer setting to passing 
@@ -38,8 +39,9 @@ class ProductController extends Controller
     {
         parent::__construct($renderEngine);
         $this->session = App::call()->session;
-        $this->repoProductDriver = new ProductRepository();
         $this->request = App::call()->request;
+        $this->repoProductDriver = new ProductRepository();
+        $this->validator = App::call()->validator;
     }
 
     /**
@@ -68,7 +70,8 @@ class ProductController extends Controller
     public function actionCard()
     {
         $is_login = false;
-        $id = filter_var($this->request->getParams('id'), FILTER_VALIDATE_INT);
+        $id = $this->request->getParams('id');
+        $id = $this->validator->validateInt($id);
         $product = $this->repoProductDriver->getOne($id);
 
         if (!$product) {
