@@ -28,6 +28,9 @@ return [
         ],
         'request' => [
             'class' => \app\services\Request::class,
-        ]
+        ],
+        'session' => [
+            'class' => \app\services\Session::class,
+        ],
     ],
 ];
