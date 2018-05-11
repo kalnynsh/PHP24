@@ -18,7 +18,8 @@ use app\models\entities\User;
 use app\models\repositories\UserRepository;
 use app\services\AuthCheck;
 use app\interfaces\IRenderer;
-use app\services\Session;
+use app\base\App;
+use app\services\Validator;
 
 /**
  * User Controller
@@ -26,6 +27,9 @@ use app\services\Session;
 class UserController extends Controller
 {
     private $_authCheck;
+    protected $request;
+    protected $validator;
+    protected $session;
 
     /**
      * Init property with AuthCheck entity
@@ -34,6 +38,9 @@ class UserController extends Controller
     {
         parent::__construct($renderEngine);
         $this->_authCheck = new AuthCheck();
+        $this->validator = new Validator();
+        $this->request = App::call()->request;
+        $this->session = App::call()->session;
     }
 
     /**
@@ -55,18 +62,18 @@ class UserController extends Controller
      */
     public function actionLogin()
     {
-        $message = '';
+        if ($this->request->isPost()) {
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if (isset($_POST['sumbit_login'])) {
-                $login = filter_var(
-                    trim($_POST['user_login']),
-                    FILTER_SANITIZE_SPECIAL_CHARS
-                );
-                $pswd = filter_var(
-                    trim($_POST['user_password']),
-                    FILTER_SANITIZE_SPECIAL_CHARS
-                );
+            $submitLogIn = $this->request->getPost('sumbit_login');
+
+            if (!is_null($submitLogIn)) {
+
+                $login = $this->request->getPost('user_login');
+                $login = $this->validator->sanitizeSpecialChars($login);
+
+                $pswd = $this->request->getPost('user_password');
+                $pswd = $this->validator->sanitizeSpecialChars($pswd);
+
                 $lastLogin = date('Y-m-d H:i:s');
             } else {
                 $message = "Неправильный логин или пароль!";
@@ -87,7 +94,7 @@ class UserController extends Controller
                 exit();
             }
         }
-
+        $message = '';
         $params = ['message' => $message, ];
         echo $this->render('login', $params);
     }
@@ -99,7 +106,7 @@ class UserController extends Controller
      */
     public function actionLogout()
     {
-        if ((new Session)::getInstance()->destroy()) {
+        if ($this->session->destroy()) {
             $message = 'Спасибо за покупки!';
             $this->redirect('/index.php');
             exit();
