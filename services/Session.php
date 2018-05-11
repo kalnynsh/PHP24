@@ -1,5 +1,16 @@
 <?php
 
+/** 
+ * PHP Session driver
+ * 
+ * PHP version 7.2
+ * 
+ * @category Session
+ * @package  Session_Driver
+ * @author   Kalnynsh <kda869@yandex.ru>
+ * @license  http://example.com MIT 
+ * @link     https://github.com/kalnynsh 
+ */
 namespace app\services;
 
 /**

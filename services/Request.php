@@ -1,5 +1,16 @@
 <?php
 
+/** 
+ * PHP Request handler
+ * 
+ * PHP version 7.2
+ * 
+ * @category Request
+ * @package  Request_Handler
+ * @author   Kalnynsh <kda869@yandex.ru>
+ * @license  http://example.com MIT 
+ * @link     https://github.com/kalnynsh 
+ */
 namespace app\services;
 
 use app\services\BadRequestException;
