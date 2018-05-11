@@ -43,7 +43,6 @@ class CartController extends Controller
         $this->request = App::call()->request;
         $this->validator = App::call()->validator;
         $this->cartModel = new Cart();
-
     }
 
     /**
