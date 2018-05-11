@@ -1,5 +1,16 @@
 <?php
 
+/** 
+ * PHP App
+ * 
+ * PHP version 7.2
+ * 
+ * @category Application
+ * @package  Application_Class
+ * @author   Kalnynsh <kda869@yandex.ru>
+ * @license  http://example.com MIT 
+ * @link     https://github.com/kalnynsh 
+ */
 namespace app\base;
 
 use app\services\Db;
