@@ -1,12 +1,16 @@
 {
   "name": "learnphp/education-one.local",
-  "authors": [
-    {
-      "name": "Kalnynsh",
-      "email": "kda869@yandex.ru"
-    }
-  ],
+  "authors": [{
+    "name": "Kalnynsh",
+    "email": "kda869@yandex.ru"
+  }],
   "require": {
-    "twig/twig": "^2.4.8"
+    "twig/twig": "^2.4.8",
+    "phpunit/phpunit": "^7.1"
+  },
+  "autoload": {
+    "psr-0": {
+      "app\\": ""
+    }
   }
 }
