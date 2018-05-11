@@ -32,7 +32,7 @@ class Request
     protected $method;
     protected $post;
 
-    const POST_METHOD = 'post';
+    const POST_METHOD = 'POST';
 
     /**
      * Init properties from $_SERVER['REQUEST_URI']
