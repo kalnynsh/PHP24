@@ -19,7 +19,6 @@ use app\models\repositories\UserRepository;
 use app\services\AuthCheck;
 use app\interfaces\IRenderer;
 use app\base\App;
-use app\services\Validator;
 
 /**
  * User Controller
@@ -38,7 +37,7 @@ class UserController extends Controller
     {
         parent::__construct($renderEngine);
         $this->_authCheck = new AuthCheck();
-        $this->validator = new Validator();
+        $this->validator = App::call()->validator;
         $this->request = App::call()->request;
         $this->session = App::call()->session;
     }
