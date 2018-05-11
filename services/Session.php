@@ -14,43 +14,14 @@ class Session
     private $_sessionState = self::SESSION_NOT_STARTED;
     
     // THE only instance of the class
-    private static $_instance;
+    private $_instance;
 
     /**
      * Empty contructor
      */
     public function __construct()
     {
-    }
-
-    /**
-     * Returns THE instance of 'Session'.
-     * The session is automatically initialized if it wasn't.
-     *    
-     * @return object
-     **/
-    public static function getInstance()
-    {
-        if (!isset(self::$_instance)) {
-            self::$_instance = new self();
-        }
-        self::$_instance->startSession();
-
-        return self::$_instance;
-    }
-
-    /**
-     * (Re)starts the session.
-     *    
-     * @return bool TRUE if the session has been initialized, else FALSE.
-     **/
-    public function startSession() : bool
-    {
-        if ($this->_sessionState == self::SESSION_NOT_STARTED) {
-            $this->_sessionState = session_start();
-        }
-
-        return $this->_sessionState;
+        $this->_sessionState = session_start();
     }
 
     /**
