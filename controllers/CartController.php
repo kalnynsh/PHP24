@@ -16,7 +16,6 @@ namespace app\controllers;
 
 use app\base\App;
 use app\models\Cart;
-use app\services\Validator;
 use app\interfaces\IRenderer;
 
 /**
@@ -42,8 +41,9 @@ class CartController extends Controller
         parent::__construct($renderEngine);
         $this->session = App::call()->session;
         $this->request = App::call()->request;
+        $this->validator = App::call()->validator;
         $this->cartModel = new Cart();
-        $this->validator = new Validator();
+
     }
 
     /**
