@@ -2,7 +2,6 @@
 
 namespace app\models;
 
-use app\services\Session;
 use app\models\entities\User;
 use app\models\entities\Product;
 use app\models\repositories\ProductRepository;
@@ -23,7 +22,7 @@ class Cart extends Model
      */
     public function __construct()
     {
-        $this->session = Session::getInstance();
+        $this->session = App::call()->session;
         $this->productRepoDriver = new ProductRepository();
         $this->request = App::call()->request;
     }
