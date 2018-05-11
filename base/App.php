@@ -23,6 +23,7 @@ use app\traits\TSingletone;
  * @package  AppBase
  * @property Request $request
  * @property Db $db
+ * @property Session $session
  */
 class App
 {
