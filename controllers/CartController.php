@@ -14,9 +14,10 @@
 
 namespace app\controllers;
 
-use app\interfaces\IRenderer;
-use app\models\Cart;
 use app\base\App;
+use app\models\Cart;
+use app\services\Validator;
+use app\interfaces\IRenderer;
 
 /**
  * Cart Controller
@@ -28,6 +29,7 @@ class CartController extends Controller
     protected $session;
     protected $cartModel;
     protected $request;
+    protected $validator;
 
     /**
      * Init property $renderer setting to passing 
@@ -41,6 +43,7 @@ class CartController extends Controller
         $this->session = App::call()->session;
         $this->request = App::call()->request;
         $this->cartModel = new Cart();
+        $this->validator = new Validator();
     }
 
     /**
@@ -80,13 +83,16 @@ class CartController extends Controller
     public function actionAdd()
     {
         if ($this->request->isPost()) {
-            if (!is_null($this->request->getPost('submit_add_to_cart'))
-                || !is_null($this->request->getPost('submit_edit_cart'))) {
+            $submitAddToCart = $this->request->getPost('submit_add_to_cart');
+            $submitEditCart = $this->request->getPost('submit_add_to_cart');
 
-                $productId = $this->validateInt($this->request->getPost('id'));
+            if (!is_null($submitAddToCart) || !is_null($submitEditCart)) {
 
-                $productAmount
-                    = $this->validateInt($this->request->getPost('amount'));
+                $productId = $this->request->getPost('id');
+                $productId = $this->validator->validateInt($productId);
+
+                $productAmoun = $this->request->getPost('amount');
+                $productAmount = $this->validator->validateInt($productAmoun);
 
                 $username = $this->session->get('user')['name'];
                 $cart = $this->session->get('cart');
