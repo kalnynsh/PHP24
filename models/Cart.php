@@ -16,6 +16,7 @@ class Cart extends Model
     protected $session;
     protected $productModel;
     protected $request;
+    protected $validator;
 
     /**
      * Cart's class constructor
@@ -25,6 +26,7 @@ class Cart extends Model
         $this->session = App::call()->session;
         $this->productRepoDriver = new ProductRepository();
         $this->request = App::call()->request;
+        $this->validator = App::call()->validator;
     }
 
     /**
@@ -71,7 +73,8 @@ class Cart extends Model
      */
     public function add(Product $productEntity, int $amount)
     {
-        $id = filter_var($this->request->getParams('id'), FILTER_VALIDATE_INT);
+        $id = $this->request->getParams('id');
+        $id = $this->validator->validateInt($id);
 
         $items = [];
         $items[$productEntity->id] = $amount;
@@ -82,6 +85,7 @@ class Cart extends Model
      * Update product in cart
      *
      * @param Product $productEntity - product entity
+     * @param integer $newAmount     - amount of product
      * 
      * @return void
      */
