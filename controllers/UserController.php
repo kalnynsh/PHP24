@@ -29,6 +29,7 @@ class UserController extends Controller
     protected $request;
     protected $validator;
     protected $session;
+    protected $userRepoDriver;
 
     /**
      * Init property with AuthCheck entity
@@ -40,6 +41,7 @@ class UserController extends Controller
         $this->validator = App::call()->validator;
         $this->request = App::call()->request;
         $this->session = App::call()->session;
+        $this->userRepoDriver = App::call()->repositories->get('User');
     }
 
     /**
@@ -81,7 +83,7 @@ class UserController extends Controller
             }
 
             $userEntity = new User('', $login, '', $pswd, $lastLogin);
-            $userDb = (new UserRepository())->getUser($userEntity);
+            $userDb = $this->userRepoDriver->getUser($userEntity);
 
             if ($userDb) {
                 $this->_authCheck->setSessionParams($userDb);
