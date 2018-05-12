@@ -83,7 +83,7 @@ class CartController extends Controller
     {
         if ($this->request->isPost()) {
             $submitAddToCart = $this->request->getPost('submit_add_to_cart');
-            $submitEditCart = $this->request->getPost('submit_add_to_cart');
+            $submitEditCart = $this->request->getPost('submit_edit_cart');
 
             if (!is_null($submitAddToCart) || !is_null($submitEditCart)) {
 
