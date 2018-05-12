@@ -17,7 +17,6 @@ namespace app\controllers;
 use app\interfaces\IRenderer;
 use app\models\Cart;
 use app\models\entities\Order;
-use app\models\repositories\OrderRepository;
 use app\base\App;
 
 /**
@@ -40,7 +39,7 @@ class OrderController extends Controller
         parent::__construct($renderEngine);
         $this->session = App::call()->session;
         $this->cartModel = new Cart();
-        $this->orderRepoDriver = new OrderRepository();
+        $this->orderRepoDriver = App::call()->repositories->get('Order');
     }
 
     /**
