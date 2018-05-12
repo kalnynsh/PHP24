@@ -23,8 +23,6 @@ use app\interfaces\IRenderer;
  */
 class CartController extends Controller
 {
-    const NEW_PRODUCT = true;
-    const OLD_PRODUCT = true;
     protected $session;
     protected $cartModel;
     protected $request;
@@ -138,15 +136,5 @@ class CartController extends Controller
         $message = '';
         $params = ['message' => $message, ];
         echo $this->render('cart', $params);
-    }
-
-    /**
-     * Validate given value using FILTER_VALIDATE_INT
-     *
-     * @return integer
-     */
-    protected function validateInt($value) : integer
-    {
-        return filter_var($value, FILTER_VALIDATE_INT);
     }
 }
