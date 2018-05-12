@@ -4,7 +4,6 @@ namespace app\models;
 
 use app\models\entities\User;
 use app\models\entities\Product;
-use app\models\repositories\ProductRepository;
 use app\base\App;
 
 /**
@@ -24,7 +23,8 @@ class Cart extends Model
     public function __construct()
     {
         $this->session = App::call()->session;
-        $this->productRepoDriver = new ProductRepository();
+        $this->productRepoDriver
+            = App::call()->repositories->get('Product');
         $this->request = App::call()->request;
         $this->validator = App::call()->validator;
     }
