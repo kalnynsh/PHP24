@@ -1,3 +1,4 @@
+<div class="message-worning"><?php echo $message ? : ''; ?></div>
 <form action="/index.php/user/login" method="post" name="login-form">
     <div class="form-inputs">
         Логин:<input name="user_login" type="text"/>
@@ -9,5 +10,3 @@
         <input name="sumbit_login" value="Войти" type="submit"/>
     </div>
 </form>
-
-<div><?php echo $message ? : ''; ?></div>
