@@ -78,7 +78,9 @@ class UserController extends Controller
                 $lastLogin = date('Y-m-d H:i:s');
             } else {
                 $message = "Неправильный логин или пароль!";
-                $this->redirect('/index.php/user/login');
+                $params = ['message' => $message, ];
+
+                echo $this->render('login', $params);
                 exit();
             }
 
@@ -91,7 +93,9 @@ class UserController extends Controller
                 exit();
             } else {
                 $message = "Неправильный логин или пароль!";
-                $this->redirect('/index.php/user/login');
+                $params = ['message' => $message, ];
+
+                echo $this->render('login', $params);
                 exit();
             }
         }
