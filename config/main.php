@@ -35,5 +35,8 @@ return [
         'validator' => [
             'class' => \app\services\Validator::class,
         ],
+        'RepositoriesStorage' => [
+            'class' => \app\models\repositories\RepositoriesStorage::class,
+        ],
     ],
 ];

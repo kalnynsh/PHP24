@@ -3,9 +3,9 @@
 namespace app\base;
 
 /**
- * Storage class for storage components
+ * ComponentStorage class for storage components
  */
-class Storage
+class ComponentsStorage extends Storage
 {
     protected $items = [];
 
@@ -33,7 +33,7 @@ class Storage
     public function get($key)
     {
         if (!isset($this->items[$key])) {
-            $this->items[$key] = new $key();
+            $this->items[$key] = App::call()->createComponent($key);
         }
 
         return $this->items[$key];

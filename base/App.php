@@ -67,7 +67,7 @@ class App
     public function run($config)
     {
         $this->config = $config;
-        $this->_components = new Storage();
+        $this->_components = new ComponentsStorage();
         $this->runController();
     }
 

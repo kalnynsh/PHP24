@@ -1,11 +1,11 @@
 <?php
 
-namespace app\base;
+namespace app\models\repositories;
 
 /**
- * Storage class for storage components
+ * RepositoriesStorage class for storage repositories
  */
-class Storage
+class RepositoriesStorage
 {
     protected $items = [];
 
@@ -19,6 +19,7 @@ class Storage
      */
     public function set($key, $object)
     {
+        $key .= 'Repository';
         $this->items[$key] = $object;
     }
 
@@ -32,6 +33,8 @@ class Storage
      */
     public function get($key)
     {
+        $key .= 'Repository';
+
         if (!isset($this->items[$key])) {
             $this->items[$key] = new $key();
         }
