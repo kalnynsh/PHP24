@@ -19,12 +19,8 @@ setlocale(LC_ALL, 'ru_RU.UTF-8', 'rus_RUS.UTF-8', 'Russian_Russia.UTF-8');
 
 define('DS', DIRECTORY_SEPARATOR);
 use \app\base\App;
-use app\services\Autoloader;
 
-require_once __DIR__ . '/../services/Autoloader.php';
 require_once __DIR__ . '/../vendor/autoload.php';
-
-spl_autoload_register([new Autoloader(), 'loadClass']);
 
 $config = include_once __DIR__ . '/../config/main.php';
 
